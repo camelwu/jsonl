@@ -1,0 +1,17 @@
+{
+  "name": "jsonl",
+  "version": "1.0.0",
+  "description": "Read and parse jsonl file, translate doctor and hospitol name.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jsonl"
+  ],
+  "author": "Paul",
+  "license": "MIT",
+  "dependencies": {
+    "node-jsonl": "^0.1.0"
+  }
+}
