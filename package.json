@@ -1,17 +1,44 @@
 {
   "name": "jsonl",
-  "version": "1.0.0",
-  "description": "Read and parse jsonl file, translate doctor and hospitol name.",
+  "version": "1.0.1",
+  "description": "Identify the text in the picture, and structure text.",
   "main": "index.js",
   "scripts": {
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "build-css": "npx node-sass -o statics/css statics/stylesheets/all.scss",
+    "start": "nodemon index.js",
+    "prod": "pm2 start index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camelwu/express-redis.git"
+  },
   "keywords": [
-    "jsonl"
+    "recognition"
   ],
   "author": "Paul",
   "license": "MIT",
   "dependencies": {
-    "node-jsonl": "^0.1.0"
-  }
+    "art-template": "^4.13.2",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-art-template": "^1.0.1",
+    "image-size": "^1.0.2",
+    "morgan": "^1.10.0",
+    "node-jsonl": "^0.1.0",
+    "node-schedule": "^2.1.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "address": "^1.2.2",
+    "nodemon": "^3.0.1",
+    "opn": "^6.0.0"
+  },
+  "bugs": {
+    "url": "git+https://github.com/camelwu/express-redis/issues"
+  },
+  "homepage": "git+https://github.com/camelwu/express-redis#readme"
 }
