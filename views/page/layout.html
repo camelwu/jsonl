@@ -1,0 +1,54 @@
+<!--layout.art-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ current_page.data.title || "Free Property Management Software" }} | Tellus</title>
+    <meta name="description" content="{{ current_page.data.description || "Transforming the rental experience for landlords, property managers, and tenants." }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="zilly FE" />
+
+    <meta property="og:title" content="{{ current_page.data.title || 'Free Property Management Software' }} | Tellus" />
+    <meta property="og:description" content="{{ current_page.data.description || "Transforming the rental experience for landlords, property managers, and tenants." }}" />
+    <meta property="og:image" content="https://www.tellusapp.com/images/tellus-social-image-be66f668.png" />
+    <meta property="og:image:alt" content="Tellus. Real estate just got mobile." />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:height" content="717" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:url" content="https://www.tellusapp.com" />
+    <meta property="og:site_name" content="Free Property Management Software | Tellus" />
+    <meta property="og:type" content="website" />
+    <meta property="fb:app_id" content="1837366543039581" />
+    <meta name="twitter:title" content="{{ current_page.data.title || "Free Property Management Software" }} | Tellus" />
+    <meta name="twitter:description" content="{{ current_page.data.description || "Transforming the rental experience for landlords, property managers, and tenants." }}" />
+    <meta name="twitter:image" content="https://www.tellusapp.com/images/tellus-social-image-be66f668.png" />
+    <meta name="twitter:image:alt" content="Tellus. Real estate just got mobile." />
+    <meta name="twitter:site" content="@tellushome" />
+    <meta name="twitter:creator" content="@tellushome" />
+    <meta name="twitter:type" content="website" />
+    <meta name="twitter:app:name:iphone" content="Tellus: Rental Home Management" />
+    <meta name="twitter:app:id:iphone" content="1244408573" />
+    <meta name="twitter:app:url:iphone" content="tellus://" />
+    <meta name="twitter:app:name:iphone" content="Tellus: Rental Home Management" />
+    <meta name="twitter:app:id:iphone" content="1244408573" />
+    <meta name="twitter:app:url:iphone" content="tellus://" />
+    <meta name="twitter:app:name:googleplay" content="Tellus: Rental Home Management" />
+    <meta name="twitter:app:id:googleplay" content="com.zilly.zilly" />
+    <meta name="twitter:app:url:googleplay" content="tellus://" />
+
+    <link rel="canonical" href="https://resources.tellusapp.com{{ current_page.url }}" />
+    <link rel="icon" href="/favicon.ico">
+    <title>{{block 'title'}}My Site{{/block}}</title>
+    <!-- global CSS -->
+    <!-- <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet"> -->
+    <link href="{{config.host}}/css/all.css" rel="stylesheet">
+    {{block 'head'}}
+    {{/block}}
+</head>
+{{block 'content'}}{{/block}}
+{{include '../common/footer.html'}}
+  <script src="{{config.host}}/js/jquery.min.js"></script>
+  <script src="{{config.host}}/js/scripts.js"></script>
+  {{block 'script'}}{{/block}}
+</body>
+</html>

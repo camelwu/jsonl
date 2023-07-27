@@ -1,0 +1,243 @@
+{{extend './page/layout.html'}} {{block 'title'}}{{title}}{{/block}} {{block 'head'}} {{/block}} {{block 'content'}}
+
+<body class="transparent-header index">
+    {{include './common/header.html'}}
+    <div class="main-container">
+        <section class="imagebg position-relative">
+            <div class="lazy-image-holder" data-src="{{config.host}}/images/home-hero-91fba575.jpg">
+                <div class="tellus-rg-mask"></div>
+            </div>
+            {{include './common/top-search.html'}}
+            <div class="rg-menu hidden-xs">
+                <div class="container rg-tabs">
+                    <a class="d-inline-block rg-item">Landlord Resource Guide</a>
+                    <a class="d-inline-block rg-item active">Mortgage Resource Guide</a>
+                </div>
+            </div>
+        </section>
+        <section class="space--xs">
+            <div class="container">
+                <div class="row">
+                    <ul class="col-md-3 rg-main-category hidden-xs pt-3">
+                        {{include './common/left.html'}}
+                    </ul>
+                    <div class="ml-5 col-md-8 col-sm-12 pt-2">
+                        <h2 class="rg-category-title bold text-capitalize">{{db.selector.replace(/-/g," ")}}</h2>
+                        {{each db.categories2 val}}
+                        <h3 class="semibold rg-subcategory-title">{{val.title}}</h3>
+                        <ul class="right_content_list">
+                            {{each val.topics item}}
+                            <li class="right_content_list-li">
+                                <a href="/{{item.links}}/{{item.slug}}">
+                                    <span class="right_content_list-li-span">·</span>
+                                    <span class="right_content_list-li-span2">{{item.title}}</span>
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{/block}} {{block 'script'}}
+        <script>
+            $(document).ready(function () {
+                var widget = $('.tabs-vertical');
+                var tabs = widget.find('.tabs_left_list a'),
+                    content = widget.find('.tab_content');
+                var sel = parseInt("{{db.selector}}"),
+                    tip = $("#div_items"),
+                    input = $("#keyword")
+                //隐藏列表框
+                $("body").on("click", function () {
+                    $("#div_items").css('display', 'none');
+                });
+                $(".div_item").on("click", function (e) {
+                    $("#div_items").css('display', 'none');
+                })
+                //文本框输入
+                $("#keyword").bind("input propertychange", function () {
+                    $("#div_items").css('display', 'block');//只要输入就显示列表框
+                    if (input.val().length <= 0) {
+                        $(".div_item").css('display', 'block');//如果什么都没填，跳出，保持全部显示状态
+                        return;
+                    }
+                    $(".div_item").css('display', 'none');//如果填了，先将所有的选项隐藏
+                    for (var i = 0; i < $(".div_item").length; i++) {
+                        //模糊匹配block
+                        let str_cache = $(".div_item").eq(i).text().toLowerCase()
+                        if (str_cache.indexOf(input.val().toLowerCase()) > -1) {
+                            // if ($(".div_item").eq(i).text().substr(0, input.val().length) == input.val()) {
+                            $(".div_item").eq(i).css('display', 'block');
+                        }
+                    }
+                });
+                //项点击
+                $(".div_item").on("click", function () {
+                    let str = $.trim($(this).text());
+                    console.log($(this).attr("data-url"))
+                    $('.search_button').attr('href', $(this).attr("data-url"));
+                    $('.div_item').attr('href', $(this).attr("data-url"));
+                    input.val(str);
+                });
+                //点击Search标红提示
+                $(".search_button").on("click", function () {
+                    if ($("#keyword").val()) {
+                        $(this).attr('href', "/{{db.guide}}/search/" + $("#keyword").val());
+                        // window.location.href = ;
+                    }
+                    for (var i = 0; i < $(".div_item").length; i++) {
+                        if ($(".right_content_list li a").eq(i).text() == $(".home_search").val()) {
+                            $(".right_content_list li a").eq(i).addClass('active-red')
+                        }
+                    }
+                })
+
+                $('#keyword').bind('keyup change', function (ev) {
+                    // pull in the new value
+                    var searchTerm = $(this).val();
+
+                    // remove any old highlighted terms
+                    $('body').removeHighlight();
+
+                    // disable highlighting if empty
+                    if (searchTerm) {
+                        // highlight the new term
+                        $('.div_item').highlight(searchTerm);
+                    }
+                });
+
+                jQuery.fn.highlight = function (pat) {
+                    function innerHighlight(node, pat) {
+                        var skip = 0;
+                        if (node.nodeType == 3) {
+                            var pos = node.data.toUpperCase().indexOf(pat);
+                            if (pos >= 0) {
+                                var spannode = document.createElement('span');
+                                spannode.className = 'highlight';
+                                var middlebit = node.splitText(pos);
+                                var endbit = middlebit.splitText(pat.length);
+                                var middleclone = middlebit.cloneNode(true);
+                                spannode.appendChild(middleclone);
+                                middlebit.parentNode.replaceChild(spannode, middlebit);
+                                skip = 1;
+                            }
+                        } else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+                            for (var i = 0; i < node.childNodes.length; ++i) {
+                                i += innerHighlight(node.childNodes[i], pat);
+                            }
+                        }
+                        return skip;
+                    }
+                    return this.each(function () {
+                        innerHighlight(this, pat.toUpperCase());
+                    });
+                };
+                jQuery.fn.removeHighlight = function () {
+                    function newNormalize(node) {
+                        for (var i = 0, children = node.childNodes, nodeCount = children.length; i < nodeCount; i++) {
+                            var child = children[i];
+                            if (child.nodeType == 1) {
+                                newNormalize(child);
+                                continue;
+                            }
+                            if (child.nodeType != 3) {
+                                continue;
+                            }
+                            var next = child.nextSibling;
+                            if (next == null || next.nodeType != 3) {
+                                continue;
+                            }
+                            var combined_text = child.nodeValue + next.nodeValue;
+                            new_node = node.ownerDocument.createTextNode(combined_text);
+                            node.insertBefore(new_node, child);
+                            node.removeChild(child);
+                            node.removeChild(next);
+                            i--;
+                            nodeCount--;
+                        }
+                    }
+                    return this.find("span.highlight").each(function () {
+                        var thisParent = this.parentNode;
+                        thisParent.replaceChild(this.firstChild, this);
+                        newNormalize(thisParent);
+                    }).end();
+                };
+
+            });
+
+
+
+            var tabs = document.getElementsByClassName('tab-head')[0].getElementsByTagName('h2'),
+                contents = document.getElementsByClassName('tab-content')[0].getElementsByTagName('div');
+
+            (function changeTab(tab) {
+                for (var i = 0, len = tabs.length; i < len; i++) {
+                    tabs[i].onclick = showTab;
+                }
+            })();
+
+            function showTab() {
+                for (var i = 0, len = tabs.length; i < len; i++) {
+                    if (tabs[i] === this) {
+                        tabs[i].className = 'selected';
+                        contents[i].className = 'show';
+                    } else {
+                        tabs[i].className = '';
+                        contents[i].className = '';
+                    }
+                }
+            }
+
+        </script>
+
+        <style>
+            .showtime {
+                position: relative
+            }
+
+            #h2css {
+                font-size: 24px;
+                font-family: OpenSans-Bold;
+                font-weight: bold;
+                line-height: 32px;
+                margin: 0;
+                padding: 12px;
+            }
+
+            #h2css1 {
+                font-size: 24px;
+                font-family: OpenSans-Bold;
+                font-weight: bold;
+                line-height: 32px;
+                margin: 0;
+                padding: 12px;
+            }
+
+            .tab-head {
+                display: flex;
+                position: absolute;
+                bottom: 0;
+                padding-left: 15.5em;
+            }
+
+            .tab-content {
+                width: 100%;
+            }
+
+            .tab-content div {
+                display: none;
+            }
+
+            .selected {
+                background: rgba(255, 255, 255, 1);
+                color: rgba(30, 30, 30, 1) !important;
+            }
+
+            .tab-content .show {
+                display: block;
+            }
+        </style>
+
+        {{/block}}

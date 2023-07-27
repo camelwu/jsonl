@@ -1,0 +1,61 @@
+{{extend './page/layout.html'}}
+
+{{block 'title'}}{{title}}{{/block}}
+
+{{block 'head'}}
+
+{{/block}}
+
+{{block 'content'}}
+
+<body class="transparent-header home-body index">
+  {{include './common/header.html'}}
+  <div class="main-container">
+    <section class="imagebg">
+      <div class="lazy-image-holder" data-src="{{config.host}}/images/home.png"></div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 mt-5">
+            <h1 class="tellus-rg-title text-center">Tellus Resources</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <div class="imagebg">
+              <h1 class="tellus-rg-title position-absolute imgbg-title">Landlord<br>Resource Guide</h1>
+              <a href="/landlords" class="block position-absolute home-guide-wrapper">
+                <div class="button">View Guide
+                </div>
+              </a>
+              <div class="lazy-image-holder" data-src="{{config.host}}/images/Resource-bg.png"></div>
+              <div class="container home-guide-container"></div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <section class="imagebg">
+              <h1 class="tellus-rg-title position-absolute imgbg-title">Mortgage<br>Resource Guide</h1>
+              <a href="/mortgage" class="block position-absolute home-guide-wrapper">
+                <div class="button">View Guide
+                </div>
+              </a>
+              <div class="lazy-image-holder" data-src="{{config.host}}/images/Guide-bg.png"></div>
+              <div class="container home-guide-container"></div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  {{/block}}
+
+  {{block 'script'}}
+  <script>
+  </script>
+  {{/block}}
