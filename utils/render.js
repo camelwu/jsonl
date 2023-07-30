@@ -1,6 +1,6 @@
 const
     fs = require('fs'),
-    config = require('../configs');
+    config = require('../config');
 
 function render(res, path, tit, db, url = '', data = {
     title: '',

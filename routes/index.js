@@ -1,8 +1,5 @@
-const
-    web = require('./web'),
-    cache = require('./cache');
+const web = require('./web');
 
 module.exports = function (app) {
     web(app)
-    cache(app)
 }

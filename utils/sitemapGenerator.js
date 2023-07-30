@@ -1,5 +1,5 @@
 const
-  configs = require('../configs'),
+  configs = require('../config'),
   SitemapGenerator = require('sitemap-generator');
 // create 
 generator_host = process.env.NODE_ENV !== 'production' ? 'http://localhost:' + configs.port : configs.host

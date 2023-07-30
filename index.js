@@ -21,10 +21,11 @@ app.set('views', path.join(__dirname, './views'))
 app.set('view engine', 'html')
 
 app.use(logger('dev'))
-app.use(express.static(path.join(__dirname, 'statics')))
-app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, './static')))
+app.use(bodyParser.json({'limit':'30000kb'}))
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: true,
+    limit: '30000kb'
 }))
 app.use(cookieParser())
 
@@ -37,6 +38,6 @@ var server = app.listen(config.port, function () {
     var host = server.address().address
     var port = server.address().port
 
-    console.log('Example app listening at http://%s:%s', host, port)
+    console.log('This app listening at http://%s:%s', host, port)
     process.env.NODE_ENV !== 'production' && opn("http://"+address.ip()+":"+port)
 })
