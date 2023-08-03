@@ -1,0 +1,5 @@
+{{each db.categories}}
+<li>
+  <a data-index="{{$index}}" href="/{{db.guide}}/{{$value.slug}}" class="{{if $value.slug==db.selector}}tab-active{{/if}}">{{$value.title}}</a>
+</li>
+{{/each}}

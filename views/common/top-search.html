@@ -1,0 +1,20 @@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-10">
+                <h1 class="bold tellus-rg-title" style="white-space: pre-line;">
+                    {{db.resource_guide.title.replace(" ","\n")}}
+                </h1>
+                <div class="d-flex">
+                    <input type="text" class="rg-search-keyword col--" name="keyword" id="keyword" autocomplete="off" />
+                    <a class="bg-grandient rg-search-btn">Search</a>
+                    <div id="div_items">
+                        {{each db.topics}}
+                        <a class="div_item" data-url="/{{$value.links}}/{{$value.slug}}">
+                            {{$value.title}}
+                        </a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

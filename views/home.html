@@ -1,0 +1,38 @@
+{{extend './page/layout.html'}}
+
+{{block 'title'}}{{title}}{{/block}}
+
+{{block 'head'}}
+
+{{/block}}
+
+{{block 'content'}}
+<h1>欢迎光临</h1>
+<div class="col-lg-8 px-0">
+  <p class="fs-5">选择上传图片并点击“开始识别” 按钮 </p>
+  <p>暂时没加限制，后续每人每天3张限额</p>
+</div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <form class="ajax-form">
+          <input type="file" multiple="false" id="thisImg" name="thisImg" onchange="selectedImg(event)">
+          <button class="btn btn-primary" type="submit">开始识别</button>
+        </form>
+      </div>
+      <div class="col-6">
+        <section id="output">
+          <h1 class="tellus-rg-title position-absolute imgbg-title">识别结果</h1>
+          <div class="container home-guide-container" id="output"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+{{/block}}
+
+{{block 'script'}}
+<script>
+</script>
+{{/block}}

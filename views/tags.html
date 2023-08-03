@@ -1,0 +1,68 @@
+{{extend './page/layout.html'}}
+
+{{block 'title'}}{{title}}{{/block}}
+
+{{block 'head'}}
+<style>
+  body {
+    position: relative;
+  }
+</style>
+{{/block}}
+{{block 'content'}}
+<body>
+{{include './common/header.html'}}
+
+<div class="main-container">
+  <div class="container-fluid tags-top">
+    <div class="container">
+      <a href="javascript:;" class="tags-link">Tags<div class="tags-icon"></div></a>
+    </div>
+    <div class="tags-top-all">
+      <div class="container tags_content">
+        {{each db.categories}}<a href="#{{$value.slug}}"
+          class="float-left tags-top-block">{{$value.title}}</a>{{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="title-bread-crumbs">
+      <ul>
+        <li><a href="/">Resource Guide Categories</a></li>
+        <li>&nbsp;>&nbsp;</li>
+        <li>Tags</li>
+      </ul>
+    </div>
+    <h2 class="tags-h2">Tags</h2>
+    <hr>
+    <div class="row_div">
+      {{each db.categories}}
+      <div class="row">
+        <div class="col-md-3 alltags">
+          <h4 id="{{$value.slug}}">{{$value.title}}</h4>
+        </div>
+        <div class="col-md-7 offset-md-1 alltags">
+          <ul class="right_content_list">
+            {{each $value.topics topic i}}
+            <li><a class="tags-cnt-list" data-index="{{$i}}" href="/{{topic.links}}/{{topic.slug}}">{{topic.title}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script>
+  $('.float-left').on("click", function (e) {
+    $('.tags-top-all').blur();
+  })
+
+  $(".tags-top").on("click", function () {
+    $(".tags-top-all").slideToggle();
+  })
+</script>
+{{/block}}

@@ -1,0 +1,57 @@
+{{extend './page/layout.html'}}
+
+{{block 'title'}}{{title}}{{/block}}
+
+{{block 'head'}}
+
+{{/block}}
+
+{{block 'content'}}
+<body>
+{{include './common/header.html'}}
+<div class="main-container ">
+  <div class="container">
+    <div class="title-bread-crumbs">
+      <ul>
+        <li><a href="/">Resource Guide Categories</a></li>
+        <li>&nbsp;>&nbsp;</li>
+        <li><a href="#here">{{db.category.replace(/-/g," ")}}</a></li>
+      </ul>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-md-3 hidden-sm hidden-xs">
+        <ul class="detail-left-list">
+          {{include './common/left.html'}}
+        </ul>
+      </div>
+      <div class="col-md-9 col-sm-12 col-12">
+        <div>
+          <h2><strong>{{db.topic.title}}</strong></h2>
+          <div class="tags_cody">
+            {{each db.topic.tag_ids id}}
+            {{each db.tags tag i}}
+            {{if tag.id==id}}
+            <a class="tags" href="/tags#{{tag.slug}}">#{{tag.title}}</a>
+            {{/if}}
+            {{/each}}
+            {{/each}}
+          </div>
+          <div class="detail-content-list">
+            <div class="detail-content-list-p">{{@ db.topic.body}}</div>
+          </div>
+          <ul class="detail-ul">
+            {{each db.topics item}}
+            <li class="detail-ul-li"><a class="detail-ul-li-a" href="/{{item.links}}/{{item.slug}}">{{item.title}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/block}}
+{{block 'script'}}
+<script>
+</script>
+{{/block}}
